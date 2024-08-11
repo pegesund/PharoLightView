@@ -8,7 +8,9 @@ Class {
 		'children',
 		'id',
 		'h',
-		'extraAttributes'
+		'extraAttributes',
+		'parent',
+		'isPage'
 	],
 	#category : 'LightView-rendering',
 	#package : 'LightView',
@@ -17,8 +19,8 @@ Class {
 
 { #category : 'adding' }
 LVHtml >> addChild: c [
-
-		children add: c.
+   c parent: self.
+	children add: c
 ]
 
 { #category : 'accessing' }
@@ -60,9 +62,31 @@ LVHtml >> id: anObject [
 { #category : 'initialization' }
 LVHtml >> initialize [
 
-	super initialize .
+	super initialize.
 	children := OrderedCollection new.
-	extraAttributes := {  }
+	extraAttributes := {  }.
+	isPage := false.
+]
+
+{ #category : 'accessing' }
+LVHtml >> page [
+	"Iterates up in hierarchy to find page"
+	| p |
+	p := self parent.
+	[ p class = LVPage ] doWhileFalse: [ p := p parent ].
+	^ p
+]
+
+{ #category : 'accessing' }
+LVHtml >> parent [
+
+	^ parent
+]
+
+{ #category : 'accessing' }
+LVHtml >> parent: anObject [
+
+	parent := anObject
 ]
 
 { #category : 'removing' }
@@ -75,10 +99,12 @@ LVHtml >> removeChild: c [
 LVHtml >> render [
 	"A component MUST have a unique name. Overwrite this method if you need other attributes or another base tag"
 
+	| attribs |
+	attribs := id
+		           ifNil: [ extraAttributes ]
+		           ifNotNil: [ { ('id' -> id) } , extraAttributes ].
 	h
-		div: {
-				(#class -> 'lv-component').
-				 } , extraAttributes
+		div: { (#class -> 'lv-component') } , attribs
 		with: [ self renderChildren ]
 ]
 
@@ -86,6 +112,12 @@ LVHtml >> render [
 LVHtml >> renderChildren [
 
 	^ ''
+]
+
+{ #category : 'accessing' }
+LVHtml >> renderer [
+
+	^ h
 ]
 
 { #category : 'accessing' }

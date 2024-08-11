@@ -27,6 +27,27 @@ LVPage >> createdAt: anObject [
 	createdAt := anObject
 ]
 
+{ #category : 'initialization' }
+LVPage >> initialize [ 
+   super initialize .
+   isPage := true.
+]
+
+{ #category : 'rendering' }
+LVPage >> render [
+	"Overwrite for page other page rendering"
+
+	| attribs |
+	attribs := id
+		           ifNil: [ extraAttributes ]
+		           ifNotNil: [ { ('id' -> id) } , extraAttributes ].
+	h
+		div: {
+				(#class -> 'lv-page').
+				(#name -> name) } , attribs
+		with: [ self renderChildren ]
+]
+
 { #category : 'accessing' }
 LVPage >> sessionId [
 

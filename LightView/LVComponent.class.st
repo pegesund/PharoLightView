@@ -38,15 +38,13 @@ LVComponent >> name: anObject [
 LVComponent >> render [
 	"A component MUST have a unique name. Overwrite this method if you need other attributes or another base tag"
 
+	| attribs |
+	attribs := id
+		           ifNil: [ extraAttributes ]
+		           ifNotNil: [ { ('id' -> id) } , extraAttributes ].
 	h
-		div: (({
+		div: {
 				(#class -> 'lv-component').
-				(#name -> name) }) , extraAttributes)
+				(#name -> name) } , attribs
 		with: [ self renderChildren ]
-]
-
-{ #category : 'accessing' }
-LVComponent >> renderer [
-
-	^ h
 ]
