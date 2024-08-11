@@ -22,14 +22,6 @@ Class {
 	#tag : 'rendering'
 }
 
-{ #category : 'initialization' }
-LVComponent >> initialize [
-
-	super initialize.
-	children := OrderedCollection new.
-	extraAttributes := {  }
-]
-
 { #category : 'accessing' }
 LVComponent >> name [
 
