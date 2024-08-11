@@ -2,23 +2,24 @@
 I am the base class for hooks that change how attributes are rendered.
 "
 Class {
-	#name : 'LWAttributeRenderer',
+	#name : 'LVAttributeRenderer',
 	#superclass : 'Object',
 	#instVars : [
 		'parent'
 	],
-	#category : 'LightView',
-	#package : 'LightView'
+	#category : 'LightView-rendering',
+	#package : 'LightView',
+	#tag : 'rendering'
 }
 
 { #category : 'accessing' }
-LWAttributeRenderer >> parent: anObject [
+LVAttributeRenderer >> parent: anObject [
 
 	parent := anObject
 ]
 
 { #category : 'rendering' }
-LWAttributeRenderer >> render: attributeEntry [
+LVAttributeRenderer >> render: attributeEntry [
 	"Render an attribute value to string, may do some special handling.
 	Returns a new association with value processed.
 	Default implementation just returns attribute mapping as is."
