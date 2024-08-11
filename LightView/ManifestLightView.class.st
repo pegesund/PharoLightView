@@ -13,7 +13,7 @@ Class {
 ManifestLightView class >> ruleClassNotReferencedRuleV1FalsePositive [
 
 	<ignoreForCoverage>
-	^ #(#(#(#RGClassDefinition #(#LVComponent)) #'2024-08-11T13:48:55.962541+02:00') )
+	^ #(#(#(#RGClassDefinition #(#LVComponent)) #'2024-08-11T13:48:55.962541+02:00') #(#(#RGClassDefinition #(#LVPage)) #'2024-08-11T20:43:03.831329+02:00') )
 ]
 
 { #category : 'code-critics' }
