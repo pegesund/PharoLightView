@@ -10,6 +10,20 @@ Class {
 }
 
 { #category : 'code-critics' }
+ManifestLightView class >> ruleClassNotReferencedRuleV1FalsePositive [
+
+	<ignoreForCoverage>
+	^ #(#(#(#RGClassDefinition #(#LVComponent)) #'2024-08-11T13:48:55.962541+02:00') )
+]
+
+{ #category : 'code-critics' }
+ManifestLightView class >> ruleEqualsTrueRuleV1FalsePositive [
+
+	<ignoreForCoverage>
+	^ #(#(#(#RGMethodDefinition #(#HTMLRenderer #renderAttrs: #false)) #'2024-08-11T13:52:05.561851+02:00') )
+]
+
+{ #category : 'code-critics' }
 ManifestLightView class >> ruleExcessiveMethodsRuleV1FalsePositive [
 
 	<ignoreForCoverage>

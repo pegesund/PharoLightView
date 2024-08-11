@@ -1721,9 +1721,13 @@ HTMLRenderer >> renderAttrs: attrs [
 { #category : 'rendering' }
 HTMLRenderer >> renderComponentId [
 	"render id (if any) as data attribute and set it to nil"
-	id ifNotNil: [ out nextPutAll: ' data-lw="'; nextPutAll: id asString; nextPut: $" ].
-	id := nil.
 
+	id ifNotNil: [
+		out
+			nextPutAll: ' data-lv="';
+			nextPutAll: id asString;
+			nextPut: $" ].
+	id := nil
 ]
 
 { #category : 'rendering' }
