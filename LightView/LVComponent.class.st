@@ -14,46 +14,35 @@ isPage
 Class {
 	#name : 'LVComponent',
 	#superclass : 'LVHtml',
-	#instVars : [
-		'name'
-	],
 	#category : 'LightView-rendering',
 	#package : 'LightView',
 	#tag : 'rendering'
 }
 
 { #category : 'instance creation' }
-LVComponent class >> newName: n [
+LVComponent class >> new [
+
+	self error: 'Use newName:id: instead of new'
+]
+
+{ #category : 'instance creation' }
+LVComponent class >> newName: n id: id [
 
 	| c |
-	c := self new.
+	c := super new.
+	super initialize.
 	c name: n.
-	^ c.
-]
-
-{ #category : 'accessing' }
-LVComponent >> name [
-
-	^ name
-]
-
-{ #category : 'accessing' }
-LVComponent >> name: anObject [
-
-	name := anObject
+	c id: id.
+	^ c
 ]
 
 { #category : 'rendering' }
 LVComponent >> render [
 	"A component MUST have a unique name. Overwrite this method if you need other attributes or another base tag"
 
-	| attribs |
-	attribs := id
-		           ifNil: [ extraAttributes ]
-		           ifNotNil: [ { ('id' -> id) } , extraAttributes ].
 	h
 		div: {
 				(#class -> 'lv-component').
-				(#name -> name) } , attribs
+				(#name -> name) } 
 		with: [ self renderChildren ]
 ]

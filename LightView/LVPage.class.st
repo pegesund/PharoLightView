@@ -5,7 +5,7 @@ My children are components.
 "
 Class {
 	#name : 'LVPage',
-	#superclass : 'LVComponent',
+	#superclass : 'LVHtml',
 	#instVars : [
 		'sessionId',
 		'createdAt'
@@ -38,6 +38,21 @@ LVPage class >> getComponentNames: node set: n [
 	^ names
 ]
 
+{ #category : 'instance creation' }
+LVPage class >> new [
+  self error: 'Use newName instead. Page must have a name'
+]
+
+{ #category : 'instance creation' }
+LVPage class >> newName: n [ 
+
+	| c |
+	c := super new.
+	super initialize.
+	c name: n.
+	^ c
+]
+
 { #category : 'accessing' }
 LVPage >> createdAt [
 
@@ -64,14 +79,8 @@ LVPage >> initialize [
 LVPage >> render [
 	"Overwrite for page other page rendering"
 
-	| attribs |
-	attribs := id
-		           ifNil: [ extraAttributes ]
-		           ifNotNil: [ { ('id' -> id) } , extraAttributes ].
 	h
-		div: {
-				(#class -> 'lv-page').
-				(#name -> name) } , attribs
+		html: { }
 		with: [ self renderChildren ]
 ]
 

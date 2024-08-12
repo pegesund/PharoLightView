@@ -1689,33 +1689,32 @@ HTMLRenderer >> render: aTag with: attrsOrContent [
 ]
 
 { #category : 'rendering' }
-HTMLRenderer >> renderAttrs: attrs [
+HTMLRenderer >> renderAttrs: attrsFromRender [
 	"Output all attributes"
-
+	| attrs |
+	attrs := attrsFromRender , (component extraAttributes ).
 	(attrs isDictionary
 		 ifTrue: [ attrs associations ]
-		 ifFalse: [ attrs ])
-		collect: [ :attr | attr ]
-		thenDo: [ :attr |
-			| name value |
-			name := attr key asString.
-			value := attr value.
+		 ifFalse: [ attrs ]) do: [ :attr |
+		| name value |
+		name := attr key asString.
+		value := attr value.
 
-			(BooleanAttributes includes: name)
-				ifTrue: [ "boolean attr, only output the name if value is not false/nil"
-					value isNil | (value = false) ifFalse: [
-						out
-							nextPut: Character space;
-							nextPutAll: name ] ]
-				ifFalse: [
-					value := self maybeProcessCallbackAttr: name value: value.
-
+		(BooleanAttributes includes: name)
+			ifTrue: [ "boolean attr, only output the name if value is not false/nil"
+				value isNil | (value = false) ifFalse: [
 					out
 						nextPut: Character space;
-						nextPutAll: name;
-						nextPutAll: '="'.
-					self escapeHtml: value asString to: out.
-					out nextPut: $" ] ]
+						nextPutAll: name ] ]
+			ifFalse: [
+				value := self maybeProcessCallbackAttr: name value: value.
+
+				out
+					nextPut: Character space;
+					nextPutAll: name;
+					nextPutAll: '="'.
+				self escapeHtml: value asString to: out.
+				out nextPut: $" ] ]
 ]
 
 { #category : 'rendering' }

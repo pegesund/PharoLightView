@@ -9,7 +9,8 @@ Class {
 		'id',
 		'h',
 		'extraAttributes',
-		'parent'
+		'parent',
+		'name'
 	],
 	#category : 'LightView-rendering',
 	#package : 'LightView',
@@ -88,6 +89,12 @@ LVHtml >> contents [
 ]
 
 { #category : 'accessing' }
+LVHtml >> extraAttributes [
+
+	^ extraAttributes
+]
+
+{ #category : 'accessing' }
 LVHtml >> extraAttributes: anObject [
 
 	extraAttributes := anObject
@@ -111,6 +118,18 @@ LVHtml >> initialize [
 	super initialize.
 	children := OrderedCollection new.
 	extraAttributes := {  }.
+]
+
+{ #category : 'accessing' }
+LVHtml >> name [
+
+	^ name
+]
+
+{ #category : 'accessing' }
+LVHtml >> name: anObject [
+
+	name := anObject
 ]
 
 { #category : 'accessing' }
@@ -145,12 +164,8 @@ LVHtml >> removeChild: c [
 LVHtml >> render [
 	"A component MUST have a unique name. Overwrite this method if you need other attributes or another base tag"
 
-	| attribs |
-	attribs := id
-		           ifNil: [ extraAttributes ]
-		           ifNotNil: [ { ('id' -> id) } , extraAttributes ].
 	h
-		div: { (#class -> 'lv-component') } , attribs
+		div: { (#class -> 'lv-component') } 
 		with: [ self renderChildren ]
 ]
 
