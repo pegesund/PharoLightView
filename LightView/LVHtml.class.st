@@ -19,7 +19,9 @@ Class {
 
 { #category : 'adding' }
 LVHtml >> addChild: c [
-   c parent: self.
+
+	c renderer: h.
+	c parent: self.
 	children add: c
 ]
 
