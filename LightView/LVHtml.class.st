@@ -9,8 +9,7 @@ Class {
 		'id',
 		'h',
 		'extraAttributes',
-		'parent',
-		'isPage'
+		'parent'
 	],
 	#category : 'LightView-rendering',
 	#package : 'LightView',
@@ -19,10 +18,55 @@ Class {
 
 { #category : 'adding' }
 LVHtml >> addChild: c [
-
+	self verifyAddChild: c.
 	c renderer: h.
 	c parent: self.
 	children add: c
+]
+
+{ #category : 'adding' }
+LVHtml >> addChild: c after: n [
+	"Can be used on a page, then follows all children"
+	| keeperNode |
+	keeperNode := LVPage findChildOwnerOf: n startingAt: self page.
+	keeperNode ifNil: [
+		self error: 'to after object does not exist in this page' ].
+	keeperNode verifyAddChild: c.
+	c renderer: h.
+	c parent: keeperNode.
+	keeperNode addToChildCollection: c after: n
+]
+
+{ #category : 'adding' }
+LVHtml >> addChild: c before: n [
+
+	| keeperNode |
+	keeperNode := LVPage findChildOwnerOf: n startingAt: self page.
+	keeperNode ifNil: [
+		self error: 'to after object does not exist in this page' ].
+	keeperNode verifyAddChild: c.
+	c renderer: h.
+	c parent: keeperNode.
+	keeperNode addToChildCollection: c before: n
+]
+
+{ #category : 'adding' }
+LVHtml >> addChildFirst: c [
+	self verifyAddChild: c.
+	c renderer: h.
+	c parent: self.
+	children addFirst: c
+]
+
+{ #category : 'adding' }
+LVHtml >> addToChildCollection: obj after: a [
+	children add: obj after: a.
+]
+
+{ #category : 'adding' }
+LVHtml >> addToChildCollection: obj before: a [
+
+	children add: obj before: a
 ]
 
 { #category : 'accessing' }
@@ -67,15 +111,15 @@ LVHtml >> initialize [
 	super initialize.
 	children := OrderedCollection new.
 	extraAttributes := {  }.
-	isPage := false.
 ]
 
 { #category : 'accessing' }
 LVHtml >> page [
 	"Iterates up in hierarchy to find page"
+
 	| p |
-	p := self parent.
-	[ p class = LVPage ] doWhileFalse: [ p := p parent ].
+	p := self.
+   [ p class = LVPage ] whileFalse: [ p := p parent ].
 	^ p
 ]
 
@@ -126,4 +170,30 @@ LVHtml >> renderer [
 LVHtml >> renderer: anObject [
 
 	h := anObject
+]
+
+{ #category : 'adding' }
+LVHtml >> verifyAddChild: c [
+
+	| allComponentNames |
+	self class = LVHtml & (c class = LVComponent) ifTrue: [
+		self error: 'You can not add a LVComponent to LVHTML' ].
+
+	self class = LVHtml & (c class = LVPage) ifTrue: [
+		self error: 'You can not add a LVPage to a LVHhtml' ].
+
+	self class = LVComponent & (c class = LVPage) ifTrue: [
+		self error: 'You can not add a LVPage to a LVComponent' ].
+
+	self class = LVComponent & (c class = LVPage) ifTrue: [
+		self error: 'You can not add a LVPage to a LVComponent' ].
+
+	self class = LVPage & (c class = LVPage) ifTrue: [
+		self error: 'You can not add a LVPage to a LVPage' ].
+
+	self = c ifTrue: [ self error: 'Can not add a component to itself' ].
+
+	allComponentNames := LVPage getComponentNames: self page set: nil.
+	(allComponentNames includes: c name) ifTrue: [
+		self error: 'Duplicate component name in page' ].
 ]

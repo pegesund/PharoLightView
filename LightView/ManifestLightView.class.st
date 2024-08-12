@@ -17,6 +17,20 @@ ManifestLightView class >> ruleClassNotReferencedRuleV1FalsePositive [
 ]
 
 { #category : 'code-critics' }
+ManifestLightView class >> ruleCollectionMessagesToExternalObjectRuleV1FalsePositive [
+
+	<ignoreForCoverage>
+	^ #(#(#(#RGMethodDefinition #(#LVHtml #addChild:after: #false)) #'2024-08-12T15:53:40.129358+02:00') )
+]
+
+{ #category : 'code-critics' }
+ManifestLightView class >> ruleCollectionProtocolRuleV1FalsePositive [
+
+	<ignoreForCoverage>
+	^ #(#(#(#RGMethodDefinition #(#LVPage #getComponentNames:set: #false)) #'2024-08-12T14:16:14.447123+02:00') #(#(#RGMethodDefinition #(#'LVPage class' #getComponentNames:set: #true)) #'2024-08-12T14:33:51.564982+02:00') )
+]
+
+{ #category : 'code-critics' }
 ManifestLightView class >> ruleEqualsTrueRuleV1FalsePositive [
 
 	<ignoreForCoverage>
@@ -28,4 +42,11 @@ ManifestLightView class >> ruleExcessiveMethodsRuleV1FalsePositive [
 
 	<ignoreForCoverage>
 	^ #(#(#(#RGClassDefinition #(#HTMLRenderer)) #'2024-08-11T13:32:17.554394+02:00') )
+]
+
+{ #category : 'code-critics' }
+ManifestLightView class >> ruleRefersToClassRuleV1FalsePositive [
+
+	<ignoreForCoverage>
+	^ #(#(#(#RGMethodDefinition #(#LVHtml #addChild: #false)) #'2024-08-12T13:16:17.984798+02:00') #(#(#RGMethodDefinition #(#LVHtml #verifyAddChild: #false)) #'2024-08-12T15:15:09.315216+02:00') )
 ]

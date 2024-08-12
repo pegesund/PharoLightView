@@ -22,6 +22,15 @@ Class {
 	#tag : 'rendering'
 }
 
+{ #category : 'instance creation' }
+LVComponent class >> newName: n [
+
+	| c |
+	c := self new.
+	c name: n.
+	^ c.
+]
+
 { #category : 'accessing' }
 LVComponent >> name [
 
