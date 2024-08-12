@@ -10,9 +10,9 @@ Class {
 		'sessionId',
 		'createdAt'
 	],
-	#category : 'LightView-rendering',
+	#category : 'LightView-components',
 	#package : 'LightView',
-	#tag : 'rendering'
+	#tag : 'components'
 }
 
 { #category : 'accessing' }
@@ -71,8 +71,11 @@ LVPage >> getComponentNames: node set: n [
 ]
 
 { #category : 'initialization' }
-LVPage >> initialize [ 
-   super initialize .
+LVPage >> initialize [
+
+	super initialize.
+	self addChild: LVCHeader new.
+	self addChild: LVCBody new.
 ]
 
 { #category : 'rendering' }

@@ -97,6 +97,14 @@ LightViewTest >> testFindNodeObject [
 	self assert: fNode equals: page
 ]
 
+{ #category : 'tests' }
+LightViewTest >> testRenderPage [
+
+	| page |
+	page := LVPage newName: 'MyPage'.
+	page render contents inspect.
+]
+
 { #category : 'testRendring' }
 LightViewTest >> testSimpleRendring [
 

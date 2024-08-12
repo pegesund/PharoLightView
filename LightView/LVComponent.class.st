@@ -14,9 +14,9 @@ isPage
 Class {
 	#name : 'LVComponent',
 	#superclass : 'LVHtml',
-	#category : 'LightView-rendering',
+	#category : 'LightView-components',
 	#package : 'LightView',
-	#tag : 'rendering'
+	#tag : 'components'
 }
 
 { #category : 'instance creation' }
@@ -33,7 +33,17 @@ LVComponent class >> newName: n id: id [
 	super initialize.
 	c name: n.
 	c id: id.
+	c extraAttributes: { ('id' -> id) . ( 'name' -> n) }.
 	^ c
+]
+
+{ #category : 'instance creation' }
+LVComponent class >> superNew [
+	| c |
+	c := super new.
+	super initialize.
+   self initialize .
+   ^ c.
 ]
 
 { #category : 'rendering' }

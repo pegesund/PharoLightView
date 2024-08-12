@@ -12,9 +12,9 @@ Class {
 		'parent',
 		'name'
 	],
-	#category : 'LightView-rendering',
+	#category : 'LightView-components',
 	#package : 'LightView',
-	#tag : 'rendering'
+	#tag : 'components'
 }
 
 { #category : 'adding' }
@@ -172,7 +172,7 @@ LVHtml >> render [
 { #category : 'rendering' }
 LVHtml >> renderChildren [
 
-	^ ''
+	children do: [ :c | c render ].
 ]
 
 { #category : 'accessing' }

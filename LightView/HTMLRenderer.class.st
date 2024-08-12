@@ -38,9 +38,9 @@ Class {
 		'EscapedCharacters',
 		'VoidElementTags'
 	],
-	#category : 'LightView-rendering',
+	#category : 'LightView-components',
 	#package : 'LightView',
-	#tag : 'rendering'
+	#tag : 'components'
 }
 
 { #category : 'compiling' }
@@ -1138,6 +1138,7 @@ HTMLRenderer >> img: attrs [
 
 { #category : 'initialization' }
 HTMLRenderer >> initialize [
+	out := WriteStream on: String new.
 
 	
 ]
