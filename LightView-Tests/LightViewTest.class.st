@@ -102,7 +102,8 @@ LightViewTest >> testRenderPage [
 
 	| page |
 	page := LVPage newName: 'MyPage'.
-	page render contents inspect.
+	self assert: (page render) equals: '<html><header></header><body></body></html>'
+
 ]
 
 { #category : 'testRendring' }
@@ -118,7 +119,7 @@ LightViewTest >> testSimpleRendring [
 	l name: 'myname'.
 	l renderer: r.
 	r component: l.
-	contents := l render contents.
+	contents := l html contents.
 
 
 	self

@@ -19,16 +19,16 @@ LVCBody class >> new [
 	^ c.
 ]
 
+{ #category : 'rendering' }
+LVCBody >> html [
+	h
+		body: { }
+		with: [ self renderChildren ]
+]
+
 { #category : 'initialization' }
 LVCBody >> initialize [
 	super initialize .
 	id := 'body'.
 	name := 'body'
-]
-
-{ #category : 'rendering' }
-LVCBody >> render [
-	h
-		body: { }
-		with: [ self renderChildren ]
 ]

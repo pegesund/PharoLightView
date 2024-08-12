@@ -19,15 +19,15 @@ LVCHeader class >> new [
 	^ c.
 ]
 
+{ #category : 'rendering' }
+LVCHeader >> html [
+
+	h header: {  } with: [ self renderChildren ]
+]
+
 { #category : 'initialization' }
 LVCHeader >> initialize [
 	super initialize .
 	id := 'header'.
 	name := 'header'
-]
-
-{ #category : 'rendering' }
-LVCHeader >> render [
-
-	h header: {  } with: [ self renderChildren ]
 ]

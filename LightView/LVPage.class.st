@@ -70,21 +70,21 @@ LVPage >> getComponentNames: node set: n [
 	^ self class getComponentNames: node set: n 
 ]
 
+{ #category : 'rendering' }
+LVPage >> html [
+	"Overwrite for page other page rendering"
+
+	h
+		html: { }
+		with: [ self renderChildren ]
+]
+
 { #category : 'initialization' }
 LVPage >> initialize [
 
 	super initialize.
 	self addChild: LVCHeader new.
 	self addChild: LVCBody new.
-]
-
-{ #category : 'rendering' }
-LVPage >> render [
-	"Overwrite for page other page rendering"
-
-	h
-		html: { }
-		with: [ self renderChildren ]
 ]
 
 { #category : 'accessing' }

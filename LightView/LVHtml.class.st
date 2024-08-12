@@ -100,6 +100,15 @@ LVHtml >> extraAttributes: anObject [
 	extraAttributes := anObject
 ]
 
+{ #category : 'rendering' }
+LVHtml >> html [
+	"A component MUST have a unique name. Overwrite this method if you need other attributes or another base tag"
+
+	h
+		div: { (#class -> 'lv-component') } 
+		with: [ self renderChildren ]
+]
+
 { #category : 'accessing' }
 LVHtml >> id [
 
@@ -162,17 +171,26 @@ LVHtml >> removeChild: c [
 
 { #category : 'rendering' }
 LVHtml >> render [
-	"A component MUST have a unique name. Overwrite this method if you need other attributes or another base tag"
 
-	h
-		div: { (#class -> 'lv-component') } 
-		with: [ self renderChildren ]
+	| stream renderer res |
+	stream := WriteStream on: String new.
+	renderer := HTMLRenderer new.
+	renderer out: stream.
+	renderer component: self.
+	h := renderer.
+	self html.
+	res := stream contents.
+	stream close.
+	^ res.
 ]
 
 { #category : 'rendering' }
 LVHtml >> renderChildren [
 
-	children do: [ :c | c render ].
+	children do: [ :c |
+		c renderer: h.
+		h component: c.
+		c html ]
 ]
 
 { #category : 'accessing' }

@@ -47,7 +47,7 @@ LVComponent class >> superNew [
 ]
 
 { #category : 'rendering' }
-LVComponent >> render [
+LVComponent >> html [
 	"A component MUST have a unique name. Overwrite this method if you need other attributes or another base tag"
 
 	h
