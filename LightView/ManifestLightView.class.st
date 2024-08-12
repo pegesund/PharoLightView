@@ -50,3 +50,10 @@ ManifestLightView class >> ruleRefersToClassRuleV1FalsePositive [
 	<ignoreForCoverage>
 	^ #(#(#(#RGMethodDefinition #(#LVHtml #addChild: #false)) #'2024-08-12T13:16:17.984798+02:00') #(#(#RGMethodDefinition #(#LVHtml #verifyAddChild: #false)) #'2024-08-12T15:15:09.315216+02:00') )
 ]
+
+{ #category : 'code-critics' }
+ManifestLightView class >> ruleSendsDifferentSuperRuleV1FalsePositive [
+
+	<ignoreForCoverage>
+	^ #(#(#(#RGMethodDefinition #(#'LVComponent class' #newName: #true)) #'2024-08-12T20:00:23.554966+02:00') #(#(#RGMethodDefinition #(#'LVPage class' #newName: #true)) #'2024-08-12T20:20:53.831255+02:00') #(#(#RGMethodDefinition #(#'LVComponent class' #newName:id: #true)) #'2024-08-12T20:21:07.792331+02:00') )
+]
