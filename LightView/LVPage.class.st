@@ -88,6 +88,13 @@ LVPage >> initialize [
 ]
 
 { #category : 'accessing' }
+LVPage >> request: req [
+	"Overwrite this to write your own request handler"
+
+	^ self render
+]
+
+{ #category : 'accessing' }
 LVPage >> sessionId [
 
 	^ sessionId

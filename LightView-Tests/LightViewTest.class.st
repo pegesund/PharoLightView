@@ -1,9 +1,20 @@
 Class {
 	#name : 'LightViewTest',
 	#superclass : 'TestCase',
+	#instVars : [
+		'server'
+	],
 	#category : 'LightView-Tests',
 	#package : 'LightView-Tests'
 }
+
+{ #category : 'running' }
+LightViewTest >> setUp [
+	super setUp.
+
+	LVServer stopAll .
+	server := LVServer createNew start.
+]
 
 { #category : 'tests' }
 LightViewTest >> testAddChildAfter [
@@ -46,6 +57,20 @@ LightViewTest >> testAddChildFirst [
 	page addChildFirst: c2.
 	names := LVPage getComponentNames: page set: nil.
 	self assert: names asArray equals: #( 'MyPage' 'C2' 'C1' )
+]
+
+{ #category : 'tests' }
+LightViewTest >> testAddSimpleGetRoute [
+
+	| page |
+	page := LVPage newName: 'Simple page'.
+	server addRoute: 'hello' toPage: page method: #get.
+	server inspect.
+]
+
+{ #category : 'tests' }
+LightViewTest >> testAddSimpleRoute [	
+  
 ]
 
 { #category : 'tests' }

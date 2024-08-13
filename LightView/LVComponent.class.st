@@ -56,3 +56,9 @@ LVComponent >> html [
 				(#name -> name) } 
 		with: [ self renderChildren ]
 ]
+
+{ #category : 'accessing' }
+LVComponent >> request: req [
+  "Overwrite this to write your own request handler"
+   ^ self render.
+]
