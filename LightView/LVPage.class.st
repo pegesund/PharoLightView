@@ -84,10 +84,8 @@ LVPage >> head [
 { #category : 'rendering' }
 LVPage >> html [
 	"Overwrite for page other page rendering"
-
-	h
-		html: { }
-		with: [ self renderChildren ]
+   h out nextPutAll: '<!DOCTYPE html>'; cr.
+	h html: {  } with: [ self renderChildren ]
 ]
 
 { #category : 'initialization' }
