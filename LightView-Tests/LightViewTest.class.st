@@ -10,10 +10,18 @@ Class {
 
 { #category : 'running' }
 LightViewTest >> setUp [
+
 	super setUp.
 
-	LVServer stopAll .
+	Teapot stopAll.
 	server := LVServer createNew start.
+]
+
+{ #category : 'running' }
+LightViewTest >> tearDown [
+
+	server stop.
+	super tearDown .
 ]
 
 { #category : 'tests' }
@@ -62,15 +70,17 @@ LightViewTest >> testAddChildFirst [
 { #category : 'tests' }
 LightViewTest >> testAddSimpleGetRoute [
 
-	| page |
+	| page response |
 	page := LVPage newName: 'Simple page'.
+	page body addChild: (SimpleDiv newName: 'simple-div' id: 'mydiv').
 	server addRoute: 'hello' toPage: page method: #get.
-	server inspect.
-]
-
-{ #category : 'tests' }
-LightViewTest >> testAddSimpleRoute [	
-  
+	response := ZnClient new
+		            url: 'http://localhost:1701/hello' asZnUrl;
+		            get.
+	self
+		assert: response asString
+		equals:
+		'<html><header></header><body><div id="mydiv" name="simple-div">hello</div></body></html>'
 ]
 
 { #category : 'tests' }

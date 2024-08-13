@@ -56,7 +56,12 @@ LVServer >> addRoute: route toPage: component method: method [
 { #category : 'handling' }
 LVServer >> start [
 
-	teapot := Teapot on.
-	self class addServer: teapot.
-	^ teapot.
+	teapot := Teapot on start.
+	"self class addServer: teapot."
+	^ self.
+]
+
+{ #category : 'handling' }
+LVServer >> stop [
+	teapot stop.
 ]
