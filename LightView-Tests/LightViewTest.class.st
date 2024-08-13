@@ -77,10 +77,8 @@ LightViewTest >> testAddSimpleGetRoute [
 	response := ZnClient new
 		            url: 'http://localhost:1701/hello' asZnUrl;
 		            get.
-	self
-		assert: response asString
-		equals:
-		'<html><header></header><body><div id="mydiv" name="simple-div">hello</div></body></html>'
+	self assert: response asString equals: '<!DOCTYPE html>
+<html><head><script src="https://unpkg.com/htmx.org@2.0.2" itegrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script><meta charset="UTF-8"/><title>Simple page</title></head><body><div id="mydiv" name="simple-div">hello</div></body></html>'
 ]
 
 { #category : 'tests' }
@@ -137,8 +135,10 @@ LightViewTest >> testRenderPage [
 
 	| page |
 	page := LVPage newName: 'MyPage'.
-	self assert: (page render) equals: '<html><header></header><body></body></html>'
-
+	self
+		assert: page render
+		equals: '<!DOCTYPE html>
+<html><head><script src="https://unpkg.com/htmx.org@2.0.2" itegrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script><meta charset="UTF-8"/><title>MyPage</title></head><body></body></html>'
 ]
 
 { #category : 'testRendring' }
