@@ -57,10 +57,3 @@ ManifestLightView class >> ruleSendsDifferentSuperRuleV1FalsePositive [
 	<ignoreForCoverage>
 	^ #(#(#(#RGMethodDefinition #(#'LVComponent class' #newName: #true)) #'2024-08-12T20:00:23.554966+02:00') #(#(#RGMethodDefinition #(#'LVPage class' #newName: #true)) #'2024-08-12T20:20:53.831255+02:00') #(#(#RGMethodDefinition #(#'LVComponent class' #newName:id: #true)) #'2024-08-12T20:21:07.792331+02:00') #(#(#RGMethodDefinition #(#'LVComponent class' #superNew #true)) #'2024-08-12T20:49:47.015365+02:00') #(#(#RGMethodDefinition #(#'LVCBody class' #new #true)) #'2024-08-12T20:50:41.362932+02:00') #(#(#RGMethodDefinition #(#'LVCHeader class' #new #true)) #'2024-08-12T20:50:51.266743+02:00') )
 ]
-
-{ #category : 'code-critics' }
-ManifestLightView class >> ruleUncommonMessageSendRuleV1FalsePositive [
-
-	<ignoreForCoverage>
-	^ #(#(#(#RGMethodDefinition #(#LVServer #addRoute:toPage:method: #false)) #'2024-08-13T13:45:40.665821+02:00') )
-]

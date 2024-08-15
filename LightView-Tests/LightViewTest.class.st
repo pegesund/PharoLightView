@@ -1,28 +1,9 @@
 Class {
 	#name : 'LightViewTest',
 	#superclass : 'TestCase',
-	#instVars : [
-		'server'
-	],
 	#category : 'LightView-Tests',
 	#package : 'LightView-Tests'
 }
-
-{ #category : 'running' }
-LightViewTest >> setUp [
-
-	super setUp.
-
-	Teapot stopAll.
-	server := LVServer createNew start.
-]
-
-{ #category : 'running' }
-LightViewTest >> tearDown [
-
-	server stop.
-	super tearDown .
-]
 
 { #category : 'tests' }
 LightViewTest >> testAddChildAfter [
@@ -65,20 +46,6 @@ LightViewTest >> testAddChildFirst [
 	page addChildFirst: c2.
 	names := LVPage getComponentNames: page set: nil.
 	self assert: names asArray equals: #( 'MyPage' 'C2' 'C1' )
-]
-
-{ #category : 'tests' }
-LightViewTest >> testAddSimpleGetRoute [
-
-	| page response |
-	page := LVPage newName: 'Simple page'.
-	page body addChild: (SimpleDiv newName: 'simple-div' id: 'mydiv').
-	server addRoute: 'hello' toPage: page method: #get.
-	response := ZnClient new
-		            url: 'http://localhost:1701/hello' asZnUrl;
-		            get.
-	self assert: response asString equals: '<!DOCTYPE html>
-<html><head><script src="https://unpkg.com/htmx.org@2.0.2" itegrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script><meta charset="UTF-8"/><title>Simple page</title></head><body><div id="mydiv" name="simple-div">hello</div></body></html>'
 ]
 
 { #category : 'tests' }
@@ -135,10 +102,8 @@ LightViewTest >> testRenderPage [
 
 	| page |
 	page := LVPage newName: 'MyPage'.
-	self
-		assert: page render
-		equals: '<!DOCTYPE html>
-<html><head><script src="https://unpkg.com/htmx.org@2.0.2" itegrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script><meta charset="UTF-8"/><title>MyPage</title></head><body></body></html>'
+	self assert: (page render) equals: '<html><header></header><body></body></html>'
+
 ]
 
 { #category : 'testRendring' }
