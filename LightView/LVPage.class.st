@@ -55,6 +55,20 @@ LVPage class >> newName: n [
 	^ c
 ]
 
+{ #category : 'serving' }
+LVPage class >> serveStaticFileLocation: aTeapot [
+
+| packageName repository path |
+packageName := 'PharoLightView'.
+
+"Find the repository for the package"
+repository := (IceRepository registry select: [ :r | (r asString) includesSubstring: 'LightView' ]) first.
+
+path := ((repository codeDirectory fullName) , '/files').
+
+aTeapot serveStatic: 'files' from: path.
+]
+
 { #category : 'instance creation' }
 LVPage class >> statefullNewName: n [
 
