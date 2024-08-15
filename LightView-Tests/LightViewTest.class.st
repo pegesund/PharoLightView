@@ -102,8 +102,9 @@ LightViewTest >> testRenderPage [
 
 	| page |
 	page := LVPage newName: 'MyPage'.
-	self assert: (page render) equals: '<html><header></header><body></body></html>'
-
+	self
+		assert: page render
+		equals: '<html><head></head><body></body></html>'
 ]
 
 { #category : 'testRendring' }

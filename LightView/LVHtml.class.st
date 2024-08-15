@@ -72,7 +72,8 @@ LVHtml >> addToChildCollection: obj before: a [
 
 { #category : 'accessing' }
 LVHtml >> body [
-	^ children first.
+
+	^ children second
 ]
 
 { #category : 'accessing' }
@@ -108,7 +109,7 @@ LVHtml >> extraAttributes: anObject [
 { #category : 'accessing' }
 LVHtml >> header [
 
-	^ children second
+	^ children first
 ]
 
 { #category : 'rendering' }

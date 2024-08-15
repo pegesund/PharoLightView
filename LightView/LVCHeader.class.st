@@ -22,7 +22,7 @@ LVCHeader class >> new [
 { #category : 'rendering' }
 LVCHeader >> html [
 
-	h header: {  } with: [ self renderChildren ]
+	h head: {  } with: [ self renderChildren ]
 ]
 
 { #category : 'initialization' }

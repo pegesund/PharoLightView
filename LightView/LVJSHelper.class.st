@@ -2,21 +2,21 @@
 I am a class which contains the helper library to change dom on client side.
 "
 Class {
-	#name : 'JSHelper',
-	#superclass : 'LVComponent',
+	#name : 'LVJSHelper',
+	#superclass : 'LVHtml',
 	#category : 'LightView-js',
 	#package : 'LightView',
 	#tag : 'js'
 }
 
 { #category : 'rendering' }
-JSHelper >> html [
+LVJSHelper >> html [
 
-	h script: 'oj'
+	h script: self script.
 ]
 
 { #category : 'accessing' }
-JSHelper >> script [
+LVJSHelper >> script [
 
 	^ '    function parseHTML(htmlString) {
             const parser = new DOMParser();

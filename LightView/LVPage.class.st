@@ -8,7 +8,8 @@ Class {
 	#superclass : 'LVHtml',
 	#instVars : [
 		'sessionId',
-		'createdAt'
+		'createdAt',
+		'hasState'
 	],
 	#category : 'LightView-components',
 	#package : 'LightView',
@@ -44,12 +45,25 @@ LVPage class >> new [
 ]
 
 { #category : 'instance creation' }
-LVPage class >> newName: n [ 
+LVPage class >> newName: n [
 
 	| c |
 	c := super new.
+	c hasState: false.
 	super initialize.
 	c name: n.
+	^ c
+]
+
+{ #category : 'instance creation' }
+LVPage class >> newNameStatefull: n [
+
+	| c |
+	c := super new.
+	c hasState: true.
+	super initialize.
+	c name: n.
+	c body addChild: LVJSHelper new.
 	^ c
 ]
 
@@ -70,6 +84,18 @@ LVPage >> getComponentNames: node set: n [
 	^ self class getComponentNames: node set: n 
 ]
 
+{ #category : 'accessing' }
+LVPage >> hasState [
+
+	^ hasState
+]
+
+{ #category : 'accessing' }
+LVPage >> hasState: anObject [
+
+	hasState := anObject
+]
+
 { #category : 'rendering' }
 LVPage >> html [
 	"Overwrite for page other page rendering"
@@ -85,6 +111,8 @@ LVPage >> initialize [
 	super initialize.
 	self addChild: LVCHeader new.
 	self addChild: LVCBody new.
+	hasState ifNotNil: [  self body addChild: LVJSHelper ].
+	
 ]
 
 { #category : 'accessing' }
