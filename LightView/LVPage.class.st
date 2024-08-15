@@ -54,12 +54,6 @@ LVPage class >> newName: n [
 ]
 
 { #category : 'accessing' }
-LVPage >> body [
-
-	^children second
-]
-
-{ #category : 'accessing' }
 LVPage >> createdAt [
 
 	^ createdAt
@@ -74,11 +68,6 @@ LVPage >> createdAt: anObject [
 { #category : 'accessing' }
 LVPage >> getComponentNames: node set: n [ 
 	^ self class getComponentNames: node set: n 
-]
-
-{ #category : 'accessing' }
-LVPage >> head [
-	^ children first.
 ]
 
 { #category : 'rendering' }
@@ -96,13 +85,6 @@ LVPage >> initialize [
 	super initialize.
 	self addChild: LVCHeader new.
 	self addChild: LVCBody new.
-]
-
-{ #category : 'accessing' }
-LVPage >> request: req [
-	"Overwrite this to write your own request handler"
-
-	^ self render
 ]
 
 { #category : 'accessing' }
