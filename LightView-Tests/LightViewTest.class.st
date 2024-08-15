@@ -1,6 +1,9 @@
 Class {
 	#name : 'LightViewTest',
 	#superclass : 'TestCase',
+	#instVars : [
+		'server'
+	],
 	#category : 'LightView-Tests',
 	#package : 'LightView-Tests'
 }
