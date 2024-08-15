@@ -57,16 +57,17 @@ LVPage class >> newName: n [
 
 { #category : 'serving' }
 LVPage class >> serveStaticFileLocation: aTeapot [
+	"Try to serve from git repo"
+	| packageName repository path |
+	packageName := 'PharoLightView'.
 
-| packageName repository path |
-packageName := 'PharoLightView'.
+	"Find the repository for the package"
+	repository := (IceRepository registry select: [ :r |
+		               r asString includesSubstring: 'LightView' ]) first.
 
-"Find the repository for the package"
-repository := (IceRepository registry select: [ :r | (r asString) includesSubstring: 'LightView' ]) first.
+	path := repository codeDirectory fullName , '/files'.
 
-path := ((repository codeDirectory fullName) , '/files').
-
-aTeapot serveStatic: 'files' from: path.
+	aTeapot serveStatic: 'files' from: path
 ]
 
 { #category : 'instance creation' }
