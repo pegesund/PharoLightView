@@ -56,7 +56,7 @@ LVPage class >> newName: n [
 ]
 
 { #category : 'instance creation' }
-LVPage class >> newNameStatefull: n [
+LVPage class >> statefullNewName: n [
 
 	| c |
 	c := super new.
