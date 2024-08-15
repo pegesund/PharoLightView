@@ -26,6 +26,21 @@ LVPage class >> findChildOwnerOf: obj startingAt: node [
 ]
 
 { #category : 'accessing' }
+LVPage class >> findStaticFileLocation [
+
+	| packageName repository path |
+	packageName := 'PharoLightView'.
+
+	"Find the repository for the package"
+	repository := (IceRepository registry select: [ :r |
+		               r asString includesSubstring: 'LightView' ]) first.
+
+	path := (repository codeDirectory fullName , '/files').
+	
+
+]
+
+{ #category : 'accessing' }
 LVPage class >> getComponentNames: node set: n [
 	"Get name of all components. Start with nil to initiate recursion"
 
@@ -53,6 +68,20 @@ LVPage class >> newName: n [
 	super initialize.
 	c name: n.
 	^ c
+]
+
+{ #category : 'accessing' }
+LVPage class >> serveStaticFileLocation: aTeapot [
+	"Try to serve files from static path"
+	
+	| packageName repository path |
+	packageName := 'PharoLightView'.
+
+	"Find the repository for the package"
+	repository := (IceRepository registry select: [ :r |
+		               r asString includesSubstring: 'LightView' ]) first.
+	path := (repository codeDirectory fullName , '/files').
+	aTeapot serveStatic: 'files' from: path.
 ]
 
 { #category : 'instance creation' }
