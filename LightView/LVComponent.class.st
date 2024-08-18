@@ -14,6 +14,9 @@ isPage
 Class {
 	#name : 'LVComponent',
 	#superclass : 'LVHtml',
+	#instVars : [
+		'continuations'
+	],
 	#category : 'LightView-components',
 	#package : 'LightView',
 	#tag : 'components'
@@ -55,6 +58,12 @@ LVComponent >> html [
 				(#class -> 'lv-component').
 				(#name -> name) } 
 		with: [ self renderChildren ]
+]
+
+{ #category : 'initialization' }
+LVComponent >> initialize [
+	super initialize .
+	continuations := Dictionary new
 ]
 
 { #category : 'accessing' }
