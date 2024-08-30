@@ -111,6 +111,7 @@ LVPage >> html [
 LVPage >> initialize [
 
 	| header |
+	super initialize .
 	header := LVCHeader new.
 	header hasState: hasState.
 	self addChild: header.

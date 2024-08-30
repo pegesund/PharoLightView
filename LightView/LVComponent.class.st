@@ -33,10 +33,12 @@ LVComponent class >> newName: n id: id [
 
 	| c |
 	c := super new.
-	super initialize.
+	c initialize.
 	c name: n.
 	c id: id.
-	c extraAttributes: { ('id' -> id) . ( 'name' -> n) }.
+	c extraAttributes: {
+			('id' -> id).
+			('name' -> n) }.
 	^ c
 ]
 
