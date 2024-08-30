@@ -8,7 +8,22 @@ Class {
 	#package : 'LightView-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : 'running' }
+LightViewTest >> setUp [
+
+	super setUp.
+
+	server := LVServer new start.
+]
+
+{ #category : 'running' }
+LightViewTest >> tearDown [
+	server stop.
+		super tearDown .
+
+]
+
+{ #category : 'testHierarchy' }
 LightViewTest >> testAddChildAfter [
 
 	| page c1 c2 c3 names |
@@ -23,7 +38,7 @@ LightViewTest >> testAddChildAfter [
 	self assert: names asArray equals: #( 'MyPage' 'C1' 'C2' 'C3' )
 ]
 
-{ #category : 'tests' }
+{ #category : 'testHierarchy' }
 LightViewTest >> testAddChildBefore [
 
 	| page c1 c2 c3 names |
@@ -38,7 +53,7 @@ LightViewTest >> testAddChildBefore [
 	self assert: names asArray equals: #( 'MyPage' 'C1' 'C2' 'C3' )
 ]
 
-{ #category : 'tests' }
+{ #category : 'testHierarchy' }
 LightViewTest >> testAddChildFirst [
 
 	| page c1 c2 names |
@@ -51,7 +66,7 @@ LightViewTest >> testAddChildFirst [
 	self assert: names asArray equals: #( 'MyPage' 'C2' 'C1' )
 ]
 
-{ #category : 'tests' }
+{ #category : 'testHierarchy' }
 LightViewTest >> testAddingChildren [
 
 	| page c1 c2 c3 names |
@@ -66,7 +81,7 @@ LightViewTest >> testAddingChildren [
 	self assert: names size equals: 4
 ]
 
-{ #category : 'tests' }
+{ #category : 'testHierarchy' }
 LightViewTest >> testAddingNotAllowedNodes [
 
 	| page c1 c2 |
@@ -83,7 +98,7 @@ LightViewTest >> testAddingNotAllowedNodes [
 		raise: Error
 ]
 
-{ #category : 'tests' }
+{ #category : 'testHierarchy' }
 LightViewTest >> testFindNodeObject [
 
 	| page c1 c2 c3 fNode |
@@ -100,7 +115,17 @@ LightViewTest >> testFindNodeObject [
 	self assert: fNode equals: page
 ]
 
-{ #category : 'tests' }
+{ #category : 'testHttp' }
+LightViewTest >> testLVHelper [
+	"Test if js helper library runs fine"
+	| url res |
+	url := 'http://localhost:1701/lvhelper.js'.
+	res := ZnEasy get: url.
+	self assert: (res code) equals: 200.
+	
+]
+
+{ #category : 'testRendring' }
 LightViewTest >> testRenderPage [
 
 	| page |
@@ -129,4 +154,15 @@ LightViewTest >> testSimpleRendring [
 	self
 		assert: contents
 		equals: '<div class="lv-component" name="myname" id="myid"></div>'
+]
+
+{ #category : 'testHttp' }
+LightViewTest >> testStatefullServePage [
+
+	| page res |
+	page := LVPage statefullNewName: 'mypage'.
+	server addPage: page name: 'mypage'.
+	res := ZnEasy get: 'http://localhost:1701/mypage'.
+	self assert: (res contents) equals: '<html><head><script type="text/javascript" src="lvhelper.js"></script></head><body></body></html>'. 
+	
 ]

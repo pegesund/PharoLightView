@@ -7,8 +7,7 @@ Class {
 	#name : 'LVPage',
 	#superclass : 'LVHtml',
 	#instVars : [
-		'sessionId',
-		'createdAt',
+		'mountedAt',
 		'hasState'
 	],
 	#category : 'LightView-components',
@@ -48,10 +47,10 @@ LVPage class >> new [
 LVPage class >> newName: n [
 
 	| c |
-	c := super new.
+	c := super basicNew.
 	c hasState: false.
-	super initialize.
 	c name: n.
+	c initialize .
 	^ c
 ]
 
@@ -74,24 +73,12 @@ LVPage class >> serveStaticFileLocation: aTeapot [
 LVPage class >> statefullNewName: n [
 
 	| c |
-	c := super new.
+	c := super basicNew.
 	c hasState: true.
 	super initialize.
+	c initialize.
 	c name: n.
-	c body addChild: LVJSHelper new.
 	^ c
-]
-
-{ #category : 'accessing' }
-LVPage >> createdAt [
-
-	^ createdAt
-]
-
-{ #category : 'accessing' }
-LVPage >> createdAt: anObject [
-
-	createdAt := anObject
 ]
 
 { #category : 'accessing' }
@@ -123,21 +110,21 @@ LVPage >> html [
 { #category : 'initialization' }
 LVPage >> initialize [
 
-	super initialize.
-	self addChild: LVCHeader new.
-	self addChild: LVCBody new.
-	hasState ifNotNil: [  self body addChild: LVJSHelper ].
-	
+	| header |
+	header := LVCHeader new.
+	header hasState: hasState.
+	self addChild: header.
+	self addChild: LVCBody new
 ]
 
 { #category : 'accessing' }
-LVPage >> sessionId [
+LVPage >> mountedAt [
 
-	^ sessionId
+	^ mountedAt
 ]
 
 { #category : 'accessing' }
-LVPage >> sessionId: anObject [
+LVPage >> mountedAt: anObject [
 
-	sessionId := anObject
+	mountedAt := anObject
 ]

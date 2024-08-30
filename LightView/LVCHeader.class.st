@@ -4,6 +4,9 @@ Renders header
 Class {
 	#name : 'LVCHeader',
 	#superclass : 'LVComponent',
+	#instVars : [
+		'hasState'
+	],
 	#category : 'LightView-components',
 	#package : 'LightView',
 	#tag : 'components'
@@ -19,10 +22,18 @@ LVCHeader class >> new [
 	^ c.
 ]
 
+{ #category : 'accessing' }
+LVCHeader >> hasState: anObject [
+
+	hasState := anObject
+]
+
 { #category : 'rendering' }
 LVCHeader >> html [
 
-	h head: {  } with: [ self renderChildren ]
+	h head: {  } with: [
+		hasState ifTrue: [ h script: { 'type' -> 'text/javascript' . 'src' -> 'lvhelper.js' } ].
+		self renderChildren ]
 ]
 
 { #category : 'initialization' }
